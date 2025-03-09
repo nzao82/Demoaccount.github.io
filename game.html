@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotePro+</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: #1e1e1e;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            color: #ffcc00;
+        }
+
+        /* Input Box */
+        .note-input {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            background: #333;
+            color: white;
+            border: none;
+        }
+
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            background: #222;
+            color: white;
+            border: none;
+        }
+
+        /* Button */
+        button {
+            padding: 10px;
+            background: #ffcc00;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Notes */
+        .note {
+            background: #2a2a2a;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .note strong {
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NotePro+</h1>
+            <button id="darkModeToggle">🌙</button>
+        </header>
+        
+        <div class="note-input">
+            <select id="category">
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="ideas">Ideas</option>
+            </select>
+            <textarea id="noteText" placeholder="Write your note here..."></textarea>
+            <button id="addNote">Add Note</button>
+        </div>
+
+        <h2>Your Notes</h2>
+        <div id="notesContainer"></div>
+    </div>
+
+    <script>
+        document.getElementById("addNote").addEventListener("click", function() {
+            let noteText = document.getElementById("noteText").value;
+            let category = document.getElementById("category").value;
+            
+            if (noteText.trim() === "") {
+                alert("Please write a note!");
+                return;
+            }
+
+            let noteDiv = document.createElement("div");
+            noteDiv.classList.add("note");
+            noteDiv.innerHTML = `<strong>${category.toUpperCase()}</strong><p>${noteText}</p>`;
+            
+            document.getElementById("notesContainer").appendChild(noteDiv);
+            document.getElementById("noteText").value = "";
+        });
+    </script>
+</body>
+</html>
